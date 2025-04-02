@@ -1,0 +1,77 @@
+﻿<Window x:Class="Project.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Project"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" Click="MenuOpen_Click" />
+                <Separator />
+                <MenuItem Header="E_xit" Click="MenuExit_Click"/>
+            </MenuItem>
+
+            <MenuItem Header="_Edit">
+                <MenuItem Header="Cu_t" />
+                <MenuItem Header="_Copy" />
+                <MenuItem Header="_Paste" />
+            </MenuItem>
+
+            <MenuItem Header="_Settings">
+                <MenuItem Header="Generate by _words" />
+                <MenuItem Header="Generate by l_etters" />
+                <Separator />
+                <MenuItem Header="E_xtended settings..." />
+            </MenuItem>
+        </Menu>
+
+        <Grid Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="20">
+                <Run>Generate by</Run>
+                <Run FontWeight="Bold">words</Run>
+            </TextBlock>
+
+            <GridSplitter Grid.Row="1" Grid.Column="1" Grid.RowSpan="2" ResizeDirection="Columns"
+                          Height="Auto" Width="5" Margin="0" Background="#444"
+                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+            <TextBox x:Name="txtToGenerate" Grid.Row="1"/>
+            <TextBox x:Name="txtGenerated" Grid.Row="1" Grid.Column="2" IsReadOnly="True"/>
+
+            <Button Grid.Row="2" Margin="4" Click="ClipboardPaste_Click">Paste</Button>
+            
+            <UniformGrid Grid.Row="2" Grid.Column="2"
+                         Rows="1" Columns="2">
+                <UniformGrid Rows="1" Columns="2" Margin="4 4 2 4">
+                    <Button Margin="0 0 2 0" Click="ClipboardCut_Click">Cut</Button>
+                    <Button Margin="2 0 0 0" Click="ClipboardCopy_Click">Copy</Button>
+                </UniformGrid>
+                
+                <Button Margin="2 4 4 4" Click="GenerateText_Click" Content="Generate text" FontWeight="Bold">
+                    <Button.Background>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#FF07D607" Offset="0.0" />
+                            <GradientStop Color="#FF93F193" Offset="0.9" />
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+            </UniformGrid>
+        </Grid>
+    </DockPanel>
+</Window>
