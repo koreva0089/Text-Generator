@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Windows;
+using Project.ViewModel;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -21,6 +22,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        DataContext = new MainViewModel();
     }
 
     private void MenuExit_Click(object sender, RoutedEventArgs e)

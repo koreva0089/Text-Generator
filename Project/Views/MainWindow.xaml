@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project"
         mc:Ignorable="d"
-        Title="Text Generator" Height="450" Width="800">
+        Title="Text Generator" Height="450" Width="800"
+        Name="mainWindow">
 
     <DockPanel Background="#FFF0F0F0">
         <Menu DockPanel.Dock="Top">
@@ -25,7 +26,8 @@
                 <MenuItem Header="Generate by _words" />
                 <MenuItem Header="Generate by l_etters" />
                 <Separator />
-                <MenuItem Header="E_xtended settings..." />
+                <MenuItem Header="E_xtended settings..."
+                          Command="{Binding ShowSettingsWindowCommand}" CommandParameter="{x:Reference Name=mainWindow}"/>
             </MenuItem>
         </Menu>
 
