@@ -1,6 +1,5 @@
 ﻿using Microsoft.Win32;
 using Project.ViewModel;
-using System.Diagnostics;
 using System.IO;
 using System.Text;
 using System.Windows;
@@ -9,19 +8,15 @@ namespace Project.Commands
 {
     public class LoadTextCommand : BaseCommand
     {
+        private readonly MainViewModel mainViewModel;
+
+        public LoadTextCommand(MainViewModel mainViewModel)
+        {
+            this.mainViewModel = mainViewModel;
+        }
+
         public override void Execute(object? parameter)
         {
-            var mainViewModel = parameter as MainViewModel;
-            if (mainViewModel == null)
-            {
-#if DEBUG
-                string errorMessage = "LoadTextCommand -> mainViewModel is null";
-                Debug.WriteLine(errorMessage);
-                MessageBox.Show(errorMessage, "ERROR!", MessageBoxButton.OK, MessageBoxImage.Error);
-#endif
-                return;
-            }
-
             OpenFileDialog dialog = new();
             dialog.DefaultExt = ".txt";
             dialog.Filter = "Text documents (.txt)|*.txt";

@@ -33,12 +33,20 @@ namespace Project.ViewModel
         public ICommand CloseWindowCommand { get; }
         public ICommand LoadTextCommand { get; }
 
+        public ICommand CopyCommand { get; }
+        public ICommand PasteCommand { get; }
+        public ICommand CutCommand { get; }
+
         public MainViewModel()
         {
             GenerateTextCommand = new GenerateTextCommand(this);
             ShowSettingsWindowCommand = new ShowSettingsWindowCommand();
             CloseWindowCommand = new CloseWindowCommand();
-            LoadTextCommand = new LoadTextCommand();
+            LoadTextCommand = new LoadTextCommand(this);
+
+            CopyCommand = new CopyCommand(this);
+            PasteCommand = new PasteCommand(this);
+            CutCommand = new CutCommand(this);
         }
     }
 }

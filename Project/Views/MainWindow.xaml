@@ -17,16 +17,16 @@
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
                 <MenuItem Header="_Open"
-                          Command="{Binding LoadTextCommand}" CommandParameter="{StaticResource mainViewModel}"/>
+                          Command="{Binding LoadTextCommand}"/>
                 <Separator />
                 <MenuItem Header="E_xit"
-                          Command="{Binding CloseWindowCommand}" CommandParameter="{x:Reference Name=mainWindow}"/>
+                          Command="{Binding CloseWindowCommand}" CommandParameter="{x:Reference Name=mainWindow}" />
             </MenuItem>
 
             <MenuItem Header="_Edit">
-                <MenuItem Header="Cu_t" />
-                <MenuItem Header="_Copy" />
-                <MenuItem Header="_Paste" />
+                <MenuItem Header="Cu_t" Command="{Binding CutCommand}"/>
+                <MenuItem Header="_Copy" Command="{Binding CopyCommand}"/>
+                <MenuItem Header="_Paste" Command="{Binding PasteCommand}"/>
             </MenuItem>
 
             <MenuItem Header="_Settings">
@@ -65,13 +65,13 @@
             <TextBox x:Name="txtGenerated" Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" IsReadOnly="True"
                      Text="{Binding GeneratedText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <Button Grid.Row="2" Margin="4" Click="ClipboardPaste_Click">Paste</Button>
+            <Button Grid.Row="2" Margin="4" Command="{Binding PasteCommand}">Paste</Button>
             
             <UniformGrid Grid.Row="2" Grid.Column="2"
                          Rows="1" Columns="2">
                 <UniformGrid Rows="1" Columns="2" Margin="4 4 2 4">
-                    <Button Margin="0 0 2 0" Click="ClipboardCut_Click">Cut</Button>
-                    <Button Margin="2 0 0 0" Click="ClipboardCopy_Click">Copy</Button>
+                    <Button Margin="0 0 2 0" Command="{Binding CutCommand}">Cut</Button>
+                    <Button Margin="2 0 0 0" Command="{Binding CopyCommand}">Copy</Button>
                 </UniformGrid>
                 
                 <Button Margin="2 4 4 4" Content="Generate text" FontWeight="Bold"
