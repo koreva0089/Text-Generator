@@ -4,14 +4,20 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project"
+        xmlns:viewModels="clr-namespace:Project.ViewModel"
         mc:Ignorable="d"
         Title="Text Generator" Height="450" Width="800"
         Name="mainWindow">
 
-    <DockPanel Background="#FFF0F0F0">
+    <Window.Resources>
+        <viewModels:MainViewModel x:Key="mainViewModel" />
+    </Window.Resources>
+
+    <DockPanel DataContext="{StaticResource mainViewModel}" Background="#FFF0F0F0">
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_File">
-                <MenuItem Header="_Open" Click="MenuOpen_Click" />
+                <MenuItem Header="_Open"
+                          Command="{Binding LoadTextCommand}" CommandParameter="{StaticResource mainViewModel}"/>
                 <Separator />
                 <MenuItem Header="E_xit"
                           Command="{Binding CloseWindowCommand}" CommandParameter="{x:Reference Name=mainWindow}"/>

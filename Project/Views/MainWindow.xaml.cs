@@ -22,32 +22,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-
-        DataContext = new MainViewModel();
-    }
-
-    private void MenuOpen_Click(object sender, RoutedEventArgs e)
-    {
-        OpenFileDialog dialog = new();
-        dialog.DefaultExt = ".txt";
-        dialog.Filter = "Text documents (.txt)|*.txt";
-
-        if (dialog.ShowDialog() == true)
-        {
-            txtToGenerate.Text = string.Empty;
-
-            MessageBox.Show(dialog.FileName);
-            using (var fileStream=new FileStream(dialog.FileName, FileMode.Open))
-            {
-                byte[] buf = new byte[1024];
-                var temp = new UTF8Encoding(true);
-                int readLen;
-                while ((readLen = fileStream.Read(buf, 0, buf.Length)) > 0)
-                {
-                    txtToGenerate.Text += temp.GetString(buf, 0, readLen);
-                }
-            }
-        }
     }
 
     private void ClipboardCopy_Click(object sender, RoutedEventArgs e)

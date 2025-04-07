@@ -31,12 +31,14 @@ namespace Project.ViewModel
         public ICommand GenerateTextCommand { get; }
         public ICommand ShowSettingsWindowCommand { get; }
         public ICommand CloseWindowCommand { get; }
+        public ICommand LoadTextCommand { get; }
 
         public MainViewModel()
         {
             GenerateTextCommand = new GenerateTextCommand(this);
             ShowSettingsWindowCommand = new ShowSettingsWindowCommand();
             CloseWindowCommand = new CloseWindowCommand();
+            LoadTextCommand = new LoadTextCommand();
         }
     }
 }
