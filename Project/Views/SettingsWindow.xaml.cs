@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Project.Models;
+using Project.ViewModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Project.Views
 {
@@ -19,14 +9,20 @@ namespace Project.Views
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        public SettingsWindow()
+        private readonly SettingsViewModel settingsViewModel;
+
+        public SettingsWindow(Settings settings)
         {
             InitializeComponent();
+
+            settingsViewModel = Resources["SettingsViewModel"] as SettingsViewModel
+                ?? throw new ArgumentException();
+            settingsViewModel.GenerateType = settings.GenerateType;
         }
 
-        public void GetResult()
+        public Settings GetResult()
         {
-
+            return new Settings(settingsViewModel.GenerateType);
         }
     }
 }

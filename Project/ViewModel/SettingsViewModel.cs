@@ -1,4 +1,6 @@
-﻿using Project.Models;
+﻿using Project.Commands;
+using Project.Models;
+using System.Windows.Input;
 
 namespace Project.ViewModel
 {
@@ -13,6 +15,13 @@ namespace Project.ViewModel
                 generateType = value;
                 OnPropertyChanged(nameof(GenerateType));
             }
+        }
+
+        public ICommand SetSettingsCommand { get; }
+
+        public SettingsViewModel()
+        {
+            SetSettingsCommand = new SetSettingsCommand();
         }
     }
 }

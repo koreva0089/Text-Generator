@@ -5,11 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
         xmlns:viewModels="clr-namespace:Project.ViewModel"
+        xmlns:converters="clr-namespace:Project.Converters"
         mc:Ignorable="d"
-        Title="Settings" Height="300" Width="300">
+        Title="Settings" Height="300" Width="300"
+        Name="settingsWindow">
 
     <Window.Resources>
         <viewModels:SettingsViewModel x:Key="SettingsViewModel" />
+
+        <converters:GenerateTypeToStringConverter x:Key="GenerateTypeToStringConverter" />
+        <converters:GenerateTypeToBooleanConverter x:Key="GenerateTypeToBooleanConverter" />
 
         <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="3" />
@@ -23,12 +28,14 @@
     <DockPanel Margin="10">
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
             <TextBlock>Generate text by:</TextBlock>
-            <RadioButton GroupName="generateBy" Margin="5 0">words</RadioButton>
-            <RadioButton GroupName="generateBy">letters</RadioButton>
+            <RadioButton GroupName="generateBy" Margin="5 0"
+                         IsChecked="{Binding GenerateType, Converter={StaticResource GenerateTypeToBooleanConverter}, Mode=TwoWay, ConverterParameter=words}">words</RadioButton>
+            <RadioButton GroupName="generateBy"
+                         IsChecked="{Binding GenerateType, Converter={StaticResource GenerateTypeToBooleanConverter}, Mode=TwoWay, ConverterParameter=letters}">letters</RadioButton>
         </StackPanel>
 
         <UniformGrid DockPanel.Dock="Bottom" Columns="2">
-            <Button IsDefault="True">OK</Button>
+            <Button IsDefault="True" Command="{Binding SetSettingsCommand}" CommandParameter="{x:Reference settingsWindow}">OK</Button>
             <Button IsCancel="True">Cancel</Button>
         </UniformGrid>
 
@@ -36,6 +43,7 @@
             <GroupBox.Header>
                 <TextBlock>
                     <Run>Generate by</Run>
+                    <Run FontWeight="Bold" Text="{Binding GenerateType, Converter={StaticResource GenerateTypeToStringConverter}}" />
                 </TextBlock>
             </GroupBox.Header>
         </GroupBox>

@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project"
         xmlns:viewModels="clr-namespace:Project.ViewModel"
+        xmlns:converter="clr-namespace:Project.Converters"
         mc:Ignorable="d"
         Title="Text Generator" Height="450" Width="800"
         Name="mainWindow">
 
     <Window.Resources>
         <viewModels:MainViewModel x:Key="mainViewModel" />
+
+        <converter:GenerateTypeToStringConverter x:Key="GenerateTypeToStringConverter" />
     </Window.Resources>
 
     <DockPanel DataContext="{StaticResource mainViewModel}" Background="#FFF0F0F0">
@@ -53,7 +56,7 @@
 
             <TextBlock Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="20">
                 <Run>Generate by</Run>
-                <Run FontWeight="Bold">words</Run>
+                <Run FontWeight="Bold" Text="{Binding GenerateType, Converter={StaticResource GenerateTypeToStringConverter}}" />
             </TextBlock>
 
             <GridSplitter Grid.Row="1" Grid.Column="1" ResizeDirection="Columns"

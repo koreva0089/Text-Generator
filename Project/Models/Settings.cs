@@ -2,7 +2,7 @@
 {
     public class Settings
     {
-        private GenerateType GenerateType { get; }
+        public GenerateType GenerateType { get; }
 
         public Settings(GenerateType generateType)
         {

@@ -30,6 +30,17 @@ namespace Project.ViewModel
             }
         }
 
+        private GenerateType generateType = GenerateType.Words;
+        public GenerateType GenerateType
+        {
+            get => generateType;
+            set
+            {
+                generateType = value;
+                OnPropertyChanged(nameof(GenerateType));
+            }
+        }
+
 
         public ICommand GenerateTextCommand { get; }
         public ICommand ShowSettingsWindowCommand { get; }
@@ -42,7 +53,7 @@ namespace Project.ViewModel
 
         public MainViewModel()
         {
-            Settings = new(GenerateType.Words);
+            Settings = new(GenerateType);
 
             GenerateTextCommand = new GenerateTextCommand(this);
             ShowSettingsWindowCommand = new ShowSettingsWindowCommand(this);

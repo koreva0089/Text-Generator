@@ -19,14 +19,16 @@ namespace Project.Commands
             {
                 var mainWindow = parameter as Window;
 
-                var settingsWindow = new SettingsWindow();
+                var settingsWindow = new SettingsWindow(mainViewModel.Settings);
                 settingsWindow.Owner = mainWindow;
                 settingsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
                 // Case where user changed setting
                 if (settingsWindow.ShowDialog() == true)
                 {
-                    
+                    var settings = settingsWindow.GetResult();
+                    mainViewModel.Settings = settings;
+                    mainViewModel.GenerateType = settings.GenerateType;
                 }
             }
         }
