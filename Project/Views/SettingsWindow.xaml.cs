@@ -23,5 +23,10 @@ namespace Project.Views
         {
             InitializeComponent();
         }
+
+        public void GetResult()
+        {
+
+        }
     }
 }

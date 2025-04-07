@@ -4,10 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Project.Views"
+        xmlns:viewModels="clr-namespace:Project.ViewModel"
         mc:Ignorable="d"
-        Title="Settings" Height="600" Width="400">
+        Title="Settings" Height="300" Width="300">
+
+    <Window.Resources>
+        <viewModels:SettingsViewModel x:Key="SettingsViewModel" />
+
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Margin" Value="3" />
+        </Style>
+    </Window.Resources>
+
+    <Window.DataContext>
+        <Binding Source="{StaticResource SettingsViewModel}" />
+    </Window.DataContext>
     
-    <Grid>
-        
-    </Grid>
+    <DockPanel Margin="10">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+            <TextBlock>Generate text by:</TextBlock>
+            <RadioButton GroupName="generateBy" Margin="5 0">words</RadioButton>
+            <RadioButton GroupName="generateBy">letters</RadioButton>
+        </StackPanel>
+
+        <UniformGrid DockPanel.Dock="Bottom" Columns="2">
+            <Button IsDefault="True">OK</Button>
+            <Button IsCancel="True">Cancel</Button>
+        </UniformGrid>
+
+        <GroupBox Margin="5">
+            <GroupBox.Header>
+                <TextBlock>
+                    <Run>Generate by</Run>
+                </TextBlock>
+            </GroupBox.Header>
+        </GroupBox>
+    </DockPanel>
 </Window>
