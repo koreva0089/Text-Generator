@@ -1,46 +1,42 @@
 ﻿using Project.Commands;
-using Project.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 
 namespace Project.ViewModel
 {
-    class MainViewModel
+    public class MainViewModel : BaseViewModel
     {
-        public string TextToGenerate { get; set; }
-        public string GeneratedText { get; set; }
+        private string textToGenerate = string.Empty;
+        public string TextToGenerate
+        {
+            get => textToGenerate;
+            set
+            {
+                textToGenerate = value;
+                OnPropertyChanged(nameof(TextToGenerate));
+            }
+        }
 
-        public ICommand GenerateTextCommand { get; set; }
-        public ICommand ShowSettingsWindowCommand { get; set; }
+        private string generatedText = string.Empty;
+        public string GeneratedText
+        {
+            get => generatedText;
+            set
+            {
+                generatedText = value;
+                OnPropertyChanged(nameof(GeneratedText));
+            }
+        }
+
+
+        public ICommand GenerateTextCommand { get; }
+        public ICommand ShowSettingsWindowCommand { get; }
+        public ICommand CloseWindowCommand { get; }
 
         public MainViewModel()
         {
-            ShowSettingsWindowCommand = new RelayCommand(ShowSettingsWindow, CanShowSettingsWindow);
-        }
-
-        private bool CanShowSettingsWindow(object obj)
-        {
-            return true;
-        }
-
-        private void ShowSettingsWindow(object obj)
-        {
-            var mainWindow = obj as Window;
-
-            var settingsWindow = new SettingsWindow();
-            settingsWindow.Owner = mainWindow;
-            settingsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-
-            // Case where user changed setting
-            if (settingsWindow.ShowDialog() == true)
-            {
-                MessageBox.Show("Settings changed");
-            }
+            GenerateTextCommand = new GenerateTextCommand(this);
+            ShowSettingsWindowCommand = new ShowSettingsWindowCommand();
+            CloseWindowCommand = new CloseWindowCommand();
         }
     }
 }

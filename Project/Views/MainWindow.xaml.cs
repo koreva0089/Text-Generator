@@ -22,12 +22,8 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        DataContext = new MainViewModel();
-    }
 
-    private void MenuExit_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
+        DataContext = new MainViewModel();
     }
 
     private void MenuOpen_Click(object sender, RoutedEventArgs e)
@@ -63,11 +59,6 @@ public partial class MainWindow : Window
     private void ClipboardPaste_Click(object sender, RoutedEventArgs e)
     {
         txtToGenerate.Text = Clipboard.GetText();
-    }
-
-    private void GenerateText_Click(object sender, RoutedEventArgs e)
-    {
-        txtGenerated.Text = txtToGenerate.Text;
     }
 
     private void ClipboardCut_Click(object sender, RoutedEventArgs e)
