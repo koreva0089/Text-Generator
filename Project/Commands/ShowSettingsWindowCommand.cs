@@ -29,6 +29,8 @@ namespace Project.Commands
                     var settings = settingsWindow.GetResult();
                     mainViewModel.Settings = settings;
                     mainViewModel.GenerateType = settings.GenerateType;
+
+                    
                 }
             }
         }

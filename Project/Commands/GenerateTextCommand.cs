@@ -1,22 +1,25 @@
-﻿using Project.ViewModel;
+﻿using Project.Models;
+using Project.ViewModel;
 using System.ComponentModel;
+using System.Text;
+using System.Windows;
 
 namespace Project.Commands
 {
     public class GenerateTextCommand : BaseCommand
     {
-        private readonly MainViewModel _mainViewModel;
+        private readonly MainViewModel mainViewModel;
 
         public GenerateTextCommand(MainViewModel mainViewModel)
         {
-            _mainViewModel = mainViewModel;
+            this.mainViewModel = mainViewModel;
 
-            _mainViewModel.PropertyChanged += OnViewModelPropertyChanged;
+            this.mainViewModel.PropertyChanged += OnViewModelPropertyChanged;
         }
 
         private void OnViewModelPropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == nameof(_mainViewModel.TextToGenerate))
+            if (e.PropertyName == nameof(mainViewModel.TextToGenerate))
             {
                 OnCanExecuteChanged();
             }
@@ -24,12 +27,21 @@ namespace Project.Commands
 
         public override bool CanExecute(object? parameter)
         {
-            return !string.IsNullOrWhiteSpace(_mainViewModel.TextToGenerate) && base.CanExecute(parameter);
+            return !string.IsNullOrWhiteSpace(mainViewModel.TextToGenerate) && base.CanExecute(parameter);
         }
 
         public override void Execute(object? parameter)
         {
-            _mainViewModel.GeneratedText = _mainViewModel.TextToGenerate;
+            //mainViewModel.GeneratedText = mainViewModel.TextToGenerate;
+            Dictionary<string, Node> database = new();
+            string[] data = mainViewModel.TextToGenerate.Split(' ', StringSplitOptions.None);
+
+            StringBuilder str = new();
+            for(int i = 0; i < data.Length; i++)
+            {
+                str.AppendLine($"{i}. {data[i]}");
+            }
+            MessageBox.Show(str.ToString());
         }
     }
 }

@@ -17,11 +17,22 @@ namespace Project.ViewModel
             }
         }
 
+        private int count;
+        public int Count
+        {
+            get => count;
+            set
+            {
+                count = value;
+                OnPropertyChanged(nameof(Count));
+            }
+        }
+
         public ICommand SetSettingsCommand { get; }
 
         public SettingsViewModel()
         {
-            SetSettingsCommand = new SetSettingsCommand();
+            SetSettingsCommand = new SetSettingsCommand(this);
         }
     }
 }

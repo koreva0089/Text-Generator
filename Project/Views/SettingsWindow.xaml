@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Project.Views"
         xmlns:viewModels="clr-namespace:Project.ViewModel"
         xmlns:converters="clr-namespace:Project.Converters"
+        xmlns:validationRules="clr-namespace:Project.Validation"
         mc:Ignorable="d"
         Title="Settings" Height="300" Width="300"
         Name="settingsWindow">
@@ -15,6 +16,7 @@
 
         <converters:GenerateTypeToStringConverter x:Key="GenerateTypeToStringConverter" />
         <converters:GenerateTypeToBooleanConverter x:Key="GenerateTypeToBooleanConverter" />
+        <converters:IntToStringConverter x:Key="IntToStringConverter" />
 
         <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="3" />
@@ -35,15 +37,37 @@
         </StackPanel>
 
         <UniformGrid DockPanel.Dock="Bottom" Columns="2">
-            <Button IsDefault="True" Command="{Binding SetSettingsCommand}" CommandParameter="{x:Reference settingsWindow}">OK</Button>
+            <Button IsDefault="True" Command="{Binding Path=SetSettingsCommand}" CommandParameter="{x:Reference settingsWindow}">OK</Button>
             <Button IsCancel="True">Cancel</Button>
         </UniformGrid>
 
         <GroupBox Margin="5">
+            <Grid Margin="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <TextBlock>Count</TextBlock>
+                <TextBox x:Name="countTextBox" Grid.Column="1" MaxLines="1" Width="100" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+                    <TextBox.Text>
+                        <Binding Path="Count" UpdateSourceTrigger="PropertyChanged"
+                                 Converter="{StaticResource IntToStringConverter}">
+                            <Binding.ValidationRules>
+                                <validationRules:InvalidCharacterRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+            </Grid>
+            
             <GroupBox.Header>
                 <TextBlock>
                     <Run>Generate by</Run>
-                    <Run FontWeight="Bold" Text="{Binding GenerateType, Converter={StaticResource GenerateTypeToStringConverter}}" />
+                    <Run FontWeight="Bold" Text="{Binding GenerateType, Converter={StaticResource GenerateTypeToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 </TextBlock>
             </GroupBox.Header>
         </GroupBox>

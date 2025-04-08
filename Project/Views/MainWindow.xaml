@@ -33,8 +33,8 @@
             </MenuItem>
 
             <MenuItem Header="_Settings">
-                <MenuItem Header="Generate by _words" />
-                <MenuItem Header="Generate by l_etters" />
+                <MenuItem Header="Generate by _words" Command="{Binding SetGenerateTypeCommand}" CommandParameter="words"/>
+                <MenuItem Header="Generate by l_etters" Command="{Binding SetGenerateTypeCommand}" CommandParameter="letters"/>
                 <Separator />
                 <MenuItem Header="E_xtended settings..."
                           Command="{Binding ShowSettingsWindowCommand}" CommandParameter="{x:Reference Name=mainWindow}"/>

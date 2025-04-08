@@ -1,8 +1,7 @@
 ﻿namespace Project.Models
 {
-    public class Settings
+    public class Node
     {
-        public GenerateType GenerateType { get; set; }
         public int Count { get; set; }
     }
 }

@@ -46,6 +46,7 @@ namespace Project.ViewModel
         public ICommand ShowSettingsWindowCommand { get; }
         public ICommand CloseWindowCommand { get; }
         public ICommand LoadTextCommand { get; }
+        public ICommand SetGenerateTypeCommand { get; }
 
         public ICommand CopyCommand { get; }
         public ICommand PasteCommand { get; }
@@ -53,12 +54,17 @@ namespace Project.ViewModel
 
         public MainViewModel()
         {
-            Settings = new(GenerateType);
+            Settings = new()
+            {
+                GenerateType = GenerateType,
+                Count = 5
+            };
 
             GenerateTextCommand = new GenerateTextCommand(this);
             ShowSettingsWindowCommand = new ShowSettingsWindowCommand(this);
             CloseWindowCommand = new CloseWindowCommand();
             LoadTextCommand = new LoadTextCommand(this);
+            SetGenerateTypeCommand = new SetGenerateTypeCommand(this);
 
             CopyCommand = new CopyCommand(this);
             PasteCommand = new PasteCommand(this);
