@@ -17,6 +17,7 @@
         <converters:GenerateTypeToStringConverter x:Key="GenerateTypeToStringConverter" />
         <converters:GenerateTypeToBooleanConverter x:Key="GenerateTypeToBooleanConverter" />
         <converters:IntToStringConverter x:Key="IntToStringConverter" />
+        <converters:StepsTypeToBooleanConverter x:Key="StepsTypeToBooleanConverter" />
 
         <Style TargetType="{x:Type Button}">
             <Setter Property="Margin" Value="3" />
@@ -49,10 +50,12 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock>Count</TextBlock>
-                <TextBox x:Name="countTextBox" Grid.Column="1" MaxLines="1" Width="100" HorizontalAlignment="Left" RenderTransformOrigin="0.5,0.5">
+                <TextBlock Margin="0 5 0 0">Count</TextBlock>
+                <TextBox x:Name="countTextBox" Grid.Column="1" MaxLines="1" Width="100" HorizontalAlignment="Left"
+                         Margin="0 5 0 0">
                     <TextBox.Text>
                         <Binding Path="Count" UpdateSourceTrigger="PropertyChanged"
                                  Converter="{StaticResource IntToStringConverter}">
@@ -62,6 +65,14 @@
                         </Binding>
                     </TextBox.Text>
                 </TextBox>
+
+                <TextBlock Grid.Row="1" Margin="0 5 0 0">Steps by</TextBlock>
+                <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Margin="0 7 0 0">
+                    <RadioButton GroupName="stepsBy" Margin="0 0 10 0"
+                                 IsChecked="{Binding StepsType, Mode=TwoWay, Converter={StaticResource StepsTypeToBooleanConverter}, ConverterParameter=order}">Order</RadioButton>
+                    <RadioButton GroupName="stepsBy"
+                                 IsChecked="{Binding StepsType, Mode=TwoWay, Converter={StaticResource StepsTypeToBooleanConverter}, ConverterParameter=chaotic}">Chaotic</RadioButton>
+                </StackPanel>
             </Grid>
             
             <GroupBox.Header>

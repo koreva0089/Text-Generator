@@ -20,6 +20,7 @@ namespace Project.Views
 
             settingsViewModel.GenerateType = settings.GenerateType;
             settingsViewModel.Count = settings.Count;
+            settingsViewModel.StepsType = settings.StepsType;
         }
 
         public bool IsValidated()
@@ -35,7 +36,8 @@ namespace Project.Views
             return new Settings()
             {
                 GenerateType = settingsViewModel.GenerateType,
-                Count = settingsViewModel.Count
+                Count = settingsViewModel.Count,
+                StepsType = settingsViewModel.StepsType
             };
         }
     }

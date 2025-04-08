@@ -28,6 +28,17 @@ namespace Project.ViewModel
             }
         }
 
+        private StepsType stepsType;
+        public StepsType StepsType
+        {
+            get => stepsType;
+            set
+            {
+                stepsType = value;
+                OnPropertyChanged(nameof(StepsType));
+            }
+        }
+
         public ICommand SetSettingsCommand { get; }
 
         public SettingsViewModel()

@@ -1,23 +1,18 @@
 ﻿using Project.Models;
-using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 
 namespace Project.Converters
 {
-    public class GenerateTypeToBooleanConverter : IValueConverter
+    public class StepsTypeToBooleanConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var generateType = (GenerateType)value;
+            var type = (StepsType)value;
             var id = (string)parameter;
 
-            return generateType == GenerateType.Words && id == "words"
-                || generateType == GenerateType.Letters && id == "letters";
+            return type == StepsType.Order && id == "order"
+                || type == StepsType.Chaotic && id == "chaotic";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -29,11 +24,11 @@ namespace Project.Converters
                 var id = (string)parameter;
                 switch (id)
                 {
-                    case "words":
-                        return GenerateType.Words;
+                    case "order":
+                        return StepsType.Order;
 
-                    case "letters":
-                        return GenerateType.Letters;
+                    case "chaotic":
+                        return StepsType.Chaotic;
                 }
             }
 
