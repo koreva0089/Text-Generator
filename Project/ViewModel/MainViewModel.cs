@@ -60,6 +60,10 @@ namespace Project.ViewModel
                 Count = 5
             };
 
+#if DEBUG
+            TextToGenerate = "This is text and some other text and a text like other text so this is some text";
+#endif
+
             GenerateTextCommand = new GenerateTextCommand(this);
             ShowSettingsWindowCommand = new ShowSettingsWindowCommand(this);
             CloseWindowCommand = new CloseWindowCommand();
