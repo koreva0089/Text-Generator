@@ -81,7 +81,13 @@ namespace Project.Commands
 #if DEBUG
                 StringBuilder str = new();
 
-                str.Append("{");
+                str.AppendLine("Generate type: " +
+                    $"{(mainViewModel.Settings.GenerateType == GenerateType.Words ? "Words" : "Letters")}");
+                str.AppendLine($"Count to generate: {mainViewModel.Settings.Count}");
+                str.AppendLine("Steps type: " +
+                    $"{(mainViewModel.Settings.StepsType == StepsType.Order ? "Order" : "Chaotic")}\n");
+
+                str.Append("Structure: {");
                 for(int i = 0; i < database.Count - 1; i++)
                 {
                     str.Append($"{database[i].Text}, ");
