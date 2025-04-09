@@ -8,7 +8,7 @@
         xmlns:converters="clr-namespace:Project.Converters"
         xmlns:validationRules="clr-namespace:Project.Validation"
         mc:Ignorable="d"
-        Title="Settings" Height="300" Width="300"
+        Title="Settings" SizeToContent="Height" Width="300"
         Name="settingsWindow">
 
     <Window.Resources>

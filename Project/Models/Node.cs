@@ -1,18 +1,14 @@
-﻿using System.Numerics;
-
-namespace Project.Models
+﻿namespace Project.Models
 {
-    public class Node
+    public abstract class Node
     {
-        public string Text { get; set; }
         public int Count { get; set; }
-        public List<int> NextIndeces { get; }
+        public List<int> NextIndices { get; }
 
-        public Node(string text)
+        public Node()
         {
-            Text = text;
             Count = 1;
-            NextIndeces = new();
+            NextIndices = new();
         }
     }
 }
